@@ -1,0 +1,88 @@
+---
+- name: Deploy packit-service into OpenShift
+  hosts: all
+  tasks:
+  - name: Download the deployment
+    git:
+        repo: 'https://github.com/packit-service/deployment.git'
+        dest: /tmp/deployment
+        clone: yes
+    become: true
+  - name: Install packages for deployment
+    dnf:
+      name:
+        - ansible-2.7.10-1.fc30 # because of packit-service deployment
+        - python3-openshift
+        - make
+    become: true
+
+  - name: get token
+    command: oc whoami -t
+    register: kubeconfig_token
+    become: true
+
+  - name: Creates zuul secrets directory
+    file:
+      path: /tmp/deployment/secrets/zuul
+      state: directory
+  - name: Create secret files
+    copy:
+      content: "{{ item.value }}"
+      dest: /tmp/deployment/secrets/zuul/{{ item }}
+    become: true
+    with_items:
+    - cert.pem
+    - chain.pem
+    - copr
+    - fullchain.pem
+    - httpd-packit.conf
+    - id_rsa
+    - id_rsa.pub
+    - packit-service.yaml
+    - private-key.pem
+    - privkey.pem
+    - ssh_config
+
+  - name: Create zuul.yml template
+    copy:
+      content: |
+        # Openshift project/namespace name
+        project: myproject
+
+        # Openshift cluster url (example: https://192.168.42.66:8443)
+        host: https://127.0.0.1:8443/console
+
+        # oc login <the above host value>, oc whoami -t
+        # OR via Openshift web GUI: click on your login in top right corner, 'Copy Login Command', take the part after --token=
+        api_key: {{ kubeconfig_token }}
+
+        # To work-around 'SSL: CERTIFICATE_VERIFY_FAILED'
+        verify_ssl: no
+
+        # don't deploy fedmsg dc; good for local testing
+        without_fedmsg: false
+
+        # don't deploy redis-commander dc; good for staging deployment
+        without_redis_commander: false
+
+        # don't deploy flower dc; good for staging deployment
+        without_flower: false
+
+        # you can set the sandbox namespace name explicitly like this
+        sandbox_namespace: "packit-zuul-sandbox"
+      dest: /tmp/deployment/vars/zuul.yml.j2
+    become: true
+  - name: Create zuul.yaml
+    template:
+      src: /tmp/deployment/vars/zuul.yml.j2
+      dest: /tmp/deployment/vars/zuul.yml
+    become: true
+
+  - name: Actually deploy
+    command: make deploy
+    environment:
+      DEPLOYMENT: zuul
+      ANSIBLE_STDOUT_CALLBACK: debug
+    args:
+      chdir: /tmp/deployment/
+    become: true
