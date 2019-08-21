@@ -1,8 +1,17 @@
 ---
 - project:
+    name: packit-servie-deployment
     check:
       jobs:
-        - noop
+        - packit-service-deployment
     gate:
       jobs:
-        - noop
+        - packit-service-deployment
+
+- job:
+    name: packit-service-deployment
+    allowed-projects:
+    - packit-service/packit-service
+    final: true # this prevent job modification
+    run: files/deploy-service.yaml
+    cleanup-run: files/cleanup.yaml

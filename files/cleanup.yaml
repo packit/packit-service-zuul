@@ -1,0 +1,15 @@
+---
+- name: Deploy packit-service into OpenShift
+  hosts: all
+  tasks:
+  - name: Cleanup the cluster objects
+    command: oc delete all --all
+    environment:
+      ANSIBLE_STDOUT_CALLBACK: debug
+    become: true
+
+  - name: Cleanup the secrets
+    command: oc delete secrets --all
+    environment:
+      ANSIBLE_STDOUT_CALLBACK: debug
+    become: true
