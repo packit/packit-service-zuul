@@ -1,6 +1,6 @@
 ---
 - project:
-    name: packit-service-deployment
+    name: packit-service/packit-service-zuul
     check:
       jobs:
         - packit-service-deployment
