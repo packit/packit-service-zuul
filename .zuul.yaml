@@ -11,7 +11,7 @@
 - job:
     name: packit-service-deployment
     allowed-projects:
-    - packit-service/packit-service
+      - packit-service/packit-service
     final: true # this prevent job modification
     run: files/deploy-service.yaml
     cleanup-run: files/cleanup.yaml
