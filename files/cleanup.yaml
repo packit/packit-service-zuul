@@ -1,5 +1,5 @@
 ---
-- name: Deploy packit-service into OpenShift
+- name: Destroy packit-service objects in OpenShift
   hosts: all
   tasks:
   - name: Cleanup the cluster objects
