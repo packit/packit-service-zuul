@@ -2,7 +2,7 @@
 - name: Deploy packit-service into OpenShift
   hosts: all
   vars:
-    deployment_dir: {{ ansible_user_dir }}/{{ zuul.projects['github.com/packit-service/deployment'].src_dir }}
+    deployment_dir: "{{ ansible_user_dir }}/{{ zuul.projects['github.com/packit-service/deployment'].src_dir }}"
   tasks:
   - name: Install packages for deployment
     dnf:
@@ -19,12 +19,12 @@
 
   - name: Creates zuul secrets directory
     file:
-      path: {{ deployment_dir }}/secrets/zuul
+      path: "{{ deployment_dir }}/secrets/zuul"
       state: directory
   - name: Create secret files
     copy:
       content: "{{ item.value }}"
-      dest: {{ deployment_dir }}/secrets/zuul/{{ item }}
+      dest: "{{ deployment_dir }}/secrets/zuul/{{ item }}"
     become: true
     with_items:
     - cert.pem
@@ -66,12 +66,12 @@
 
         # you can set the sandbox namespace name explicitly like this
         sandbox_namespace: "packit-zuul-sandbox"
-      dest: {{ deployment_dir }}/vars/zuul.yml.j2
+      dest: "{{ deployment_dir }}/vars/zuul.yml.j2"
     become: true
   - name: Create zuul.yaml
     template:
-      src: {{ deployment_dir }}/vars/zuul.yml.j2
-      dest: {{ deployment_dir }}/vars/zuul.yml
+      src: "{{ deployment_dir }}/vars/zuul.yml.j2"
+      dest: "{{ deployment_dir }}/vars/zuul.yml"
     become: true
 
   - name: Actually deploy
@@ -80,5 +80,5 @@
       DEPLOYMENT: zuul
       ANSIBLE_STDOUT_CALLBACK: debug
     args:
-      chdir: {{ deployment_dir }}
+      chdir: "{{ deployment_dir }}"
     become: true
