@@ -1,6 +1,0 @@
----
-- project:
-    check:
-      - linters
-    gate:
-      - linters
