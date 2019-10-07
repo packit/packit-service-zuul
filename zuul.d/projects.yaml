@@ -22,3 +22,4 @@
     run: files/deploy-service.yaml
     cleanup-run: files/cleanup.yaml
     semaphore: packit-deployment-test
+    nodeset: fedora-30-pod
