@@ -1,0 +1,37 @@
+---
+- job:
+    name: base
+    parent: null
+    description: The base job.
+    pre-run: playbooks/base/pre.yaml
+    post-run:
+      - playbooks/base/post.yaml
+    roles:
+      - zuul: zuul-jobs
+    extra-vars:
+      zuul_use_fetch_output: true
+    timeout: 1800
+    attempts: 3
+    secrets:
+      - site_sflogs
+    nodeset:
+      nodes:
+        - name: container
+          label: pod-fedora-31
+
+- job:
+    name: linters
+    description: |
+      Run linters.
+
+      Responds to these variables:
+
+      .. zuul:jobvar:: linters
+         :default: [flake8,doc8,bashate,yamllint,ansible-lint,golint]
+
+         List of linters to execute.
+
+      .. zuul:jobvar:: ansible_lint_roles_dir
+
+         Set this variable to the Ansible roles directory.
+    run: playbooks/linters/run.yaml

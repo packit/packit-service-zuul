@@ -1,24 +1,15 @@
 ---
 - project:
-    name: packit-service/packit-service-zuul
+    name: ^.*$
+    check:
+      jobs: []
+    gate:
+      jobs: []
+
+- project:
     check:
       jobs:
-        - packit-service-deployment
+        - linters
     gate:
       jobs:
-        - packit-service-deployment
-
-- semaphore:
-    name: packit-deployment-test
-    max: 1
-
-- job:
-    name: packit-service-deployment
-    allowed-projects:
-      - packit-service/packit-service
-    required-projects:
-      - packit-service/deployment
-    final: true # this prevent job modification
-    run: files/deploy-service.yaml
-    cleanup-run: files/cleanup.yaml
-    semaphore: packit-deployment-test
+        - linters
