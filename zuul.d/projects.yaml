@@ -10,7 +10,6 @@
     check:
       jobs:
         - linters
-        - noop
     gate:
       jobs:
         - linters
