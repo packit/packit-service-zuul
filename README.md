@@ -2,8 +2,8 @@
 
 ## About Zuul CI - softwarefactory-project.io
 
-[Zuul](https://zuul-ci.org) is a CI system invented in OpenStack community.
-[Softwarefactory](https://softwarefactory-project.io) (SF) is project which is hosting a services (Zuul being one of them) to ease development of open source projects.
+[Zuul](https://zuul-ci.org) is a CI system invented in the OpenStack community.
+[Softwarefactory](https://softwarefactory-project.io) (SF) is project which is hosting services (Zuul being one of them) to ease development of open source projects.
 
 ## How it works in our case
 
