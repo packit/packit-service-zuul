@@ -21,6 +21,7 @@ Your locally cloned repo is:  `project_dir: "{{ ansible_user_dir }}/{{ zuul.proj
 ## More useful links
 
 * [Zuul Documentation](https://zuul-ci.org/docs), esp. [Job](https://zuul-ci.org/docs/zuul/reference/job_def.html) & [Job Content](https://zuul-ci.org/docs/zuul/reference/jobs.html) in [User Reference](https://zuul-ci.org/docs/zuul/reference/user.html)
+* [zuul/zuul-jobs](https://opendev.org/zuul/zuul-jobs) - Ansible job definitions for Zuul. [Roles](https://opendev.org/zuul/zuul-jobs/src/branch/master/roles) are [used](https://zuul-ci.org/docs/zuul/reference/job_def.html#attr-job.roles) by the [base job](https://github.com/packit-service/packit-service-zuul/blob/master/zuul.d/jobs.yaml#L10).
 * [Default tenant configuration](https://softwarefactory-project.io/cgit/config/tree/zuul.d) (we don't use it anymore, but you might want to take a look)
 * [OpenStack's repo](https://opendev.org/zuul/zuul-jobs/src/branch/master) with existing jobs, playbooks and roles and [repositories which use it](https://opendev.org/openstack).
 * Questions: Internal IRC channel #rhos-ops or contact directly [Fabien Boucher](https://github.com/morucci).
