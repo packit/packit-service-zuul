@@ -17,7 +17,7 @@
     nodeset:
       nodes:
         - name: container
-          label: pod-fedora-31
+          label: pod-fedora-32
 
 - job:
     name: linters
