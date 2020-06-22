@@ -9,7 +9,7 @@
 - project:
     check:
       jobs:
-        - linters
+        - pre-commit
     gate:
       jobs:
-        - linters
+        - pre-commit
