@@ -20,7 +20,7 @@ Your locally cloned repo is: `project_dir: "{{ ansible_user_dir }}/{{ zuul.proje
 
 ## More useful links
 
-- [Zuul Documentation](https://zuul-ci.org/docs), esp. [Job](https://zuul-ci.org/docs/zuul/reference/job_def.html) & [Job Content](https://zuul-ci.org/docs/zuul/reference/jobs.html) in [User Reference](https://zuul-ci.org/docs/zuul/reference/user.html)
+* [Zuul Documentation](https://zuul-ci.org/docs), esp. [Job](https://zuul-ci.org/docs/zuul/reference/job_def.html) & [Job Content](https://zuul-ci.org/docs/zuul/reference/jobs.html) in [User Reference](https://zuul-ci.org/docs/zuul/reference/user.html)
 - [zuul/zuul-jobs](https://opendev.org/zuul/zuul-jobs) - Ansible job definitions for Zuul. [Roles](https://opendev.org/zuul/zuul-jobs/src/branch/master/roles) are [used](https://zuul-ci.org/docs/zuul/reference/job_def.html#attr-job.roles) by the [base job](https://github.com/packit-service/packit-service-zuul/blob/master/zuul.d/jobs.yaml#L10).
 - [Our tenant config](https://softwarefactory-project.io/r/gitweb?p=config.git;a=blob;f=resources/tenant-packit-service.yaml;hb=HEAD)
 - [OpenStack's repo](https://opendev.org/zuul/zuul-jobs/src/branch/master) with existing jobs, playbooks and roles and [repositories which use it](https://opendev.org/openstack).
