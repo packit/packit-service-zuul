@@ -17,7 +17,7 @@
     nodeset:
       nodes:
         - name: container
-          label: pod-fedora-31
+          label: pod-fedora-32
 
 - job:
     name: linters
@@ -35,3 +35,9 @@
 
          Set this variable to the Ansible roles directory.
     run: playbooks/linters/run.yaml
+
+- job:
+    name: pre-commit
+    description: Install and run pre-commit
+    parent: base
+    run: playbooks/pre-commit.yaml

@@ -17,7 +17,7 @@
           comment: (?i)^\s*recheck\s*$
     start:
       github.com:
-        status: 'pending'
+        status: "pending"
         status-url: "https://softwarefactory-project.io/zuul/t/packit-service/status/change/{change.number},{change.patchset}"
         comment: false
       mqtt:
@@ -26,14 +26,14 @@
       Starting {pipeline.name} jobs. Status at {status_url}
     success:
       github.com:
-        status: 'success'
+        status: "success"
         status-url: "https://softwarefactory-project.io/zuul/t/packit-service/buildset/{buildset.uuid}"
       sqlreporter:
       mqtt:
         topic: "zuul/{pipeline}/result/{project}/{branch}/{change}"
     failure:
       github.com:
-        status: 'failure'
+        status: "failure"
         status-url: "https://softwarefactory-project.io/zuul/t/packit-service/buildset/{buildset.uuid}"
       sqlreporter:
       mqtt:
@@ -86,14 +86,14 @@
             - mergeit
     start:
       github.com:
-        status: 'pending'
+        status: "pending"
         status-url: "https://softwarefactory-project.io/zuul/t/packit-service/status/change/{change.number},{change.patchset}"
         comment: false
       mqtt:
         topic: "zuul/{pipeline}/start/{project}/{branch}"
     success:
       github.com:
-        status: 'success'
+        status: "success"
         status-url: "https://softwarefactory-project.io/zuul/t/packit-service/buildset/{buildset.uuid}"
         merge: true
         comment: true
@@ -102,7 +102,7 @@
         topic: "zuul/{pipeline}/result/{project}/{branch}/{change}"
     failure:
       github.com:
-        status: 'failure'
+        status: "failure"
         status-url: "https://softwarefactory-project.io/zuul/t/packit-service/buildset/{buildset.uuid}"
         comment: true
       sqlreporter:
@@ -132,7 +132,7 @@
       smtp:
         from: "zuul@softwarefactory-project.io"
         to: "root@localhost"
-        subject: '[Zuul] Job failed in post pipeline: {change.project}'
+        subject: "[Zuul] Job failed in post pipeline: {change.project}"
       sqlreporter:
       mqtt:
         topic: "zuul/{pipeline}/result/{project}/{branch}/{change}"
@@ -153,7 +153,7 @@
       smtp:
         from: "zuul@fedora.softwarefactory-project.io"
         to: "root@localhost"
-        subject: '[Zuul] Job failed in tag pipeline: {change.project}'
+        subject: "[Zuul] Job failed in tag pipeline: {change.project}"
       sqlreporter:
 
 - pipeline:
@@ -192,7 +192,7 @@
     precedence: low
     trigger:
       timer:
-        - time: '0 0 * * *'
+        - time: "0 0 * * *"
     start:
       mqtt:
         topic: "zuul/{pipeline}/start/{project}/{branch}"
@@ -204,7 +204,7 @@
       smtp:
         from: "zuul@softwarefactory-project.io"
         to: "root@localhost"
-        subject: '[Zuul] Job failed in periodic pipeline: {change.project}'
+        subject: "[Zuul] Job failed in periodic pipeline: {change.project}"
       sqlreporter:
       mqtt:
         topic: "zuul/{pipeline}/result/{project}/{branch}/{change}"
