@@ -41,3 +41,15 @@
     description: Install and run pre-commit
     parent: base
     run: playbooks/pre-commit.yaml
+
+- job:
+    name: oc-cluster-up
+    parent: base
+    attempts: 1
+    description: Deploy Openshift v3 cluster
+    pre-run:
+      - playbooks/oc-cluster-up.yaml
+    nodeset:
+      nodes:
+        - name: test-node
+          label: cloud-fedora-30
