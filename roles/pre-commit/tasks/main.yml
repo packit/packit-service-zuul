@@ -9,12 +9,7 @@
       - pre-commit
   become: true
 
-- name: Run 'pre-commit install' to set up git hook scripts
-  command: pre-commit install
-  args:
-    chdir: "{{ zuul.project.src_dir }}"
-
 - name: Run pre-commit
-  command: pre-commit run --all-files
+  command: pre-commit run --all-files --hook-stage manual
   args:
     chdir: "{{ zuul.project.src_dir }}"
