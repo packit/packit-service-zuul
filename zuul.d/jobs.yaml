@@ -50,7 +50,3 @@
     description: Deploy Openshift v3 cluster
     pre-run:
       - playbooks/oc-cluster-up.yaml
-    nodeset:
-      nodes:
-        - name: test-node
-          label: cloud-fedora-30
