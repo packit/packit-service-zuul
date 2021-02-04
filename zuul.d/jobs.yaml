@@ -18,7 +18,7 @@
     nodeset:
       nodes:
         - name: container
-          label: cloud-fedora-32
+          label: cloud-fedora-33
 
 - job:
     name: linters
