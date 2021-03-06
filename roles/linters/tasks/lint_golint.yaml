@@ -3,7 +3,8 @@
   shell: >
     find * -name "*.go" | xargs --no-run-if-empty golint -set_exit_status
   register: _golint
-  ignore_errors: yes
+  ignore_errors: true
+  changed_when: false
   environment:
     PATH: "{{ ansible_env.PATH }}:{{ ansible_env.HOME }}/.local/bin"
   args:

@@ -28,17 +28,19 @@
   file:
     path: /etc/docker/daemon.json
     state: touch
+    mode: 0644
   become: true
 - name: Add OpenShift insecure registry into docker deamon config
   copy:
     content: |
       {"insecure-registries" : [ "172.30.0.0/16" ]}
     dest: /etc/docker/daemon.json
+    mode: 0644
   become: true
 - name: Restart docker because config has changed
   systemd:
     state: restarted
-    daemon_reload: yes
+    daemon_reload: true
     name: docker
   become: true
 - name: Start Openshift cluster
@@ -47,3 +49,4 @@
     PATH: "{{ ansible_env.PATH }}:/usr/local/bin"
     DOCKER_CONFIG: "/etc/docker/daemon.json"
   become: true
+  changed_when: true

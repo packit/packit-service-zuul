@@ -2,7 +2,8 @@
 - name: "Run bashate"
   shell: find * -name "*.sh" | xargs --no-run-if-empty bashate
   register: _bashate
-  ignore_errors: yes
+  ignore_errors: true
+  changed_when: false
   environment:
     PATH: "{{ ansible_env.PATH }}:{{ ansible_env.HOME }}/.local/bin"
   args:

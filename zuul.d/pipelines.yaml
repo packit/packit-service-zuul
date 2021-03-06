@@ -51,7 +51,7 @@
     manager: dependent
     precedence: high
     supercedes: check
-    post-review: True
+    post-review: true
     require:
       github.com:
         review:
@@ -61,8 +61,8 @@
         # Require label
         label: mergeit
         status: "softwarefactory-project-zuul\\[bot\\]:packit-service/check:success"
-        open: True
-        current-patchset: True
+        open: true
+        current-patchset: true
     trigger:
       github.com:
         - event: pull_request_review
@@ -167,10 +167,10 @@
       Build failed (promote pipeline).
     manager: supercedent
     precedence: high
-    post-review: True
+    post-review: true
     require:
       github.com:
-        merged: True
+        merged: true
     trigger:
       github.com:
         - event: pull_request
@@ -211,7 +211,9 @@
 
 - pipeline:
     name: experimental
-    description: On-demand pipeline for requesting a run against a set of jobs that are not yet gating. Leave review comment of "check experimental" to run jobs in this pipeline.
+    description: >
+      On-demand pipeline for requesting a run against a set of jobs that are not yet gating.
+      Leave review comment of "check experimental" to run jobs in this pipeline.
     success-message: Build succeeded (experimental pipeline).
     failure-message: Build failed (experimental pipeline).
     manager: independent

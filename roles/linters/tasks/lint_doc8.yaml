@@ -3,7 +3,8 @@
   shell: >
     find * -name "*.rst" | xargs --no-run-if-empty doc8
   register: _doc8
-  ignore_errors: yes
+  ignore_errors: true
+  changed_when: false
   environment:
     PATH: "{{ ansible_env.PATH }}:{{ ansible_env.HOME }}/.local/bin"
   args:
