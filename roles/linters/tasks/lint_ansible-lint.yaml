@@ -2,7 +2,8 @@
 - name: Run ansible-lint
   shell: "ansible-lint -p --nocolor {{ ansible_lint_roles_dir }}/*"
   register: _ansible_lint
-  ignore_errors: yes
+  ignore_errors: true
+  changed_when: false
   args:
     chdir: "{{ zuul.project.src_dir }}"
   environment:

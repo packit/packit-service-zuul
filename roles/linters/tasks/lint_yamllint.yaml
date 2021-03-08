@@ -4,7 +4,8 @@
     find * -name "*.yml" -or -name "*.yaml" |
         xargs --no-run-if-empty yamllint -d relaxed
   register: _yamllint
-  ignore_errors: yes
+  ignore_errors: true
+  changed_when: false
   environment:
     PATH: "{{ ansible_env.PATH }}:{{ ansible_env.HOME }}/.local/bin"
   args:

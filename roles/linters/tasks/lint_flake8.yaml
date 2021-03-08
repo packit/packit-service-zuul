@@ -2,7 +2,8 @@
 - name: "Run flake8"
   shell: find * -name "*.py" | xargs --no-run-if-empty flake8
   register: _flake8
-  ignore_errors: yes
+  ignore_errors: true
+  changed_when: false
   environment:
     PATH: "{{ ansible_env.PATH }}:{{ ansible_env.HOME }}/.local/bin"
   args:

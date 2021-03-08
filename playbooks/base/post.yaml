@@ -22,7 +22,7 @@
     - role: ara-report
       # This depends-on https://review.openstack.org/577675
       # Temp turned off until fixed with https://review.opendev.org/#/c/745792
-      ara_report_run: False
+      ara_report_run: false
       ara_report_type: database
       ara_report_path: ara-report
 
