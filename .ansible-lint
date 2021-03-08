@@ -6,3 +6,4 @@ exclude_paths:
 skip_list:
   - missing-import  # in playbooks/base/ we import roles not from this repo
   - role-name  # we're not going to publish the roles
+  - unnamed-task  # pretty strict
