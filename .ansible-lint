@@ -1,7 +1,7 @@
 # https://ansible-lint.readthedocs.io/en/latest/configuring.html
 
 exclude_paths:
-- zuul.d/secret-sflogs.yaml
+  - zuul.d/secret-sflogs.yaml
 
 skip_list:
   - missing-import  # in playbooks/base/ we import roles not from this repo
