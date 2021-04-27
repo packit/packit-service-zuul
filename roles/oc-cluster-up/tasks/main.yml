@@ -12,6 +12,7 @@
       - docker-ce-cli
       - containerd.io
       - origin
+      - iproute
     state: present
   become: true
 - name: Put SELinux in permissive mode, logging actions that would be blocked.
@@ -43,6 +44,16 @@
     daemon_reload: true
     name: docker
   become: true
+- command: docker network inspect bridge
+  register: docker_network_bridge
+  changed_when: false
+- debug:
+    var: docker_network_bridge
+- command: ip a
+  register: ip_a
+  changed_when: false
+- debug:
+    var: ip_a
 - name: Start Openshift cluster
   command: oc cluster up --base-dir=/tmp --enable="-centos-imagestreams,-sample-templates,persistent-volumes,registry,router,-web-console"
   environment:
