@@ -25,7 +25,7 @@
       ara_report_type: database
       ara_report_path: ara-report
 
-- hosts: "{{ site_sflogs.fqdn }}"
+- hosts: elk.softwarefactory-project.io
   gather_facts: false
   tasks:
     # Use a block because play vars doesn't take precedence on roles vars
