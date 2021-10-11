@@ -11,17 +11,15 @@
       - docker-ce
       - docker-ce-cli
       - containerd.io
+      - centos-release-openshift-origin
     state: present
   become: true
-- name: Get Openshift Origin
-  unarchive:
-    src: https://github.com/openshift/origin/releases/download/v3.11.0/openshift-origin-client-tools-v3.11.0-0cbc58b-linux-64bit.tar.gz
-    dest: /tmp/
-    remote_src: true
-  become: true
 - name: Install Openshift Origin
-  command: mv /tmp/openshift-origin-client-tools-v3.11.0-0cbc58b-linux-64bit/oc /usr/local/bin/oc
-  changed_when: false
+  yum:
+    name:
+      - origin
+    state: present
+  become: true
 - name: Put SELinux in permissive mode, logging actions that would be blocked.
   selinux:
     policy: targeted
