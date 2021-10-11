@@ -1,4 +1,10 @@
 ---
+- name: Install epel-release
+  package:
+    name:
+      - epel-release
+  become: true
+  when: ansible_distribution == 'CentOS'
 - name: Setup Docker CE repo
   get_url:
     url: https://download.docker.com/linux/centos/docker-ce.repo
@@ -6,7 +12,7 @@
     mode: 0644
   become: true
 - name: Install Docker CE
-  yum:
+  package:
     name:
       - docker-ce
       - docker-ce-cli
@@ -15,7 +21,7 @@
     state: present
   become: true
 - name: Install Openshift Origin
-  yum:
+  package:
     name:
       - origin
     state: present
