@@ -53,4 +53,4 @@
       nodes:
         - name: test-node
           # Can't use newer (>30) fedora because of Cgroups v2
-          label: cloud-centos-8
+          label: cloud-centos-7
