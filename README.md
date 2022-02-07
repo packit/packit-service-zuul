@@ -7,12 +7,20 @@
 
 ## How it works in our case
 
-We have [softwarefactory-project-zuul](https://github.com/apps/softwarefactory-project-zuul) GitHub App [installed to all packit-service repos](https://github.com/organizations/packit-service/settings/installations).
+We have [softwarefactory-project-zuul](https://github.com/apps/softwarefactory-project-zuul)
+GitHub App [installed to all packit-service repos](https://github.com/organizations/packit-service/settings/installations).
 We have a separate [packit-service tenant in Zuul](https://softwarefactory-project.io/zuul/t/packit-service/status).
-It uses the configuration from this repository, see especially [jobs.yaml](https://github.com/packit-service/packit-service-zuul/blob/main/zuul.d/jobs.yaml) and [pipelines.yaml](https://github.com/packit-service/packit-service-zuul/blob/main/zuul.d/pipelines.yaml) in [zuul.d/](https://github.com/packit-service/packit-service-zuul/tree/main/zuul.d).
-We can easily use those pipelines & jobs from other repositories so if you have a job which could be used by more repositories, you can add it to [jobs.yaml](https://github.com/packit-service/packit-service-zuul/blob/main/zuul.d/jobs.yaml).
+It uses the configuration from this repository, see especially
+[jobs.yaml](https://github.com/packit-service/packit-service-zuul/blob/main/zuul.d/jobs.yaml)
+and [pipelines.yaml](https://github.com/packit-service/packit-service-zuul/blob/main/zuul.d/pipelines.yaml)
+in [zuul.d/](https://github.com/packit-service/packit-service-zuul/tree/main/zuul.d).
+We can easily use those pipelines & jobs from other repositories so if you have
+a job which could be used by more repositories, you can add it to
+[jobs.yaml](https://github.com/packit-service/packit-service-zuul/blob/main/zuul.d/jobs.yaml).
 
-If you want to enable Zuul in another packit-service repository, just create a `.zuul.yaml` and define `noop` job inside to test the connection, see [example](https://github.com/packit-service/packit-service-zuul/pull/8/files).
+If you want to enable Zuul in another packit-service repository,
+just create a `.zuul.yaml` and define `noop` job inside to test the connection,
+see [example](https://github.com/packit-service/packit-service-zuul/pull/8/files).
 Once the testing is done, there is a new comment posted in the PR with links to each job.
 If it looks OK, add any other jobs you want and remove the `noop` one.
 
