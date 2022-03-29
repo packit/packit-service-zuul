@@ -2,7 +2,7 @@
 - job:
     name: base
     parent: null
-    description: The base job.
+    description: The base job
     pre-run: playbooks/base/pre.yaml
     post-run:
       - playbooks/base/post.yaml
@@ -17,7 +17,7 @@
     nodeset:
       nodes:
         - name: container
-          label: cloud-fedora-34
+          label: cloud-fedora-35
 
 - job:
     name: linters
