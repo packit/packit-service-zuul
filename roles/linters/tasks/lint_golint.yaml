@@ -1,6 +1,6 @@
 ---
 - name: Run golint
-  shell: >
+  ansible.builtin.shell: >
     find * -name "*.go" | xargs --no-run-if-empty golint -set_exit_status
   register: _golint
   ignore_errors: true
@@ -11,6 +11,6 @@
     chdir: "{{ zuul.project.src_dir }}"
 
 - name: Set linter failure to true
-  set_fact:
+  ansible.builtin.set_fact:
     linter_failure: true
   when: _golint.rc
