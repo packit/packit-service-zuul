@@ -1,6 +1,6 @@
 ---
 - name: Run ansible-lint
-  shell: "ansible-lint -p --nocolor {{ ansible_lint_roles_dir }}/*"
+  ansible.builtin.shell: "ansible-lint -p --nocolor {{ ansible_lint_roles_dir }}/*"
   register: _ansible_lint
   ignore_errors: true
   changed_when: false
@@ -11,7 +11,7 @@
   when: ansible_lint_roles_dir
 
 - name: Set linter failure to true
-  set_fact:
+  ansible.builtin.set_fact:
     linter_failure: true
   when:
     - ansible_lint_roles_dir
