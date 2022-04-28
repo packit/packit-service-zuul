@@ -48,3 +48,83 @@ Your locally cloned repo is: `project_dir: "{{ ansible_user_dir }}/{{ zuul.proje
 - Zuul/Gerrit questions & issues:
   - Internal IRC channel #rhos-ops
   - softwarefactory-operations-team@redhat.com
+
+## Debug locally in a Zuul VM
+
+To debug issues related with the _Zuul VM_ you can follow this steps:
+
+- Install some _virt tools_ and Ansible:
+
+```
+$ sudo dnf install libvirt /usr/bin/virt-customize virt-manager ansible
+```
+
+- Clone `https://softwarefactory-project.io/r/config` and `cd` into it.
+
+- Add ansible, if you need to run a playbook inside the VM, to the list of installed packages
+
+```patch
+diff --git a/nodepool/virt_images/cloud-fedora-35.yaml b/nodepool/virt_images/cloud-fedora-35.yaml
+index b00d4b2e..385b955c 100644
+--- a/nodepool/virt_images/cloud-fedora-35.yaml
++++ b/nodepool/virt_images/cloud-fedora-35.yaml
+@@ -43,6 +43,7 @@
+       - python3-pyyaml
+       # For add-build-sshkey
+       - python3-libselinux
++      - ansible
+   tasks:
+     - block:
+         - import_role:
+```
+
+- Provide your public key to be able to SSH into the VM later, following this patch example
+
+```patch
+diff --git a/nodepool/virt_images/roles/zuul-user/tasks/main.yaml b/nodepool/virt_images/roles/zuul-user/tasks/main.yaml
+index e771c27d..9eb8cd3e 100644
+--- a/nodepool/virt_images/roles/zuul-user/tasks/main.yaml
++++ b/nodepool/virt_images/roles/zuul-user/tasks/main.yaml
+@@ -8,7 +8,7 @@
+
+ - name: Prepare the authorized_keys file
+   copy:
+-    src: /var/lib/nodepool/.ssh/zuul_rsa.pub
++    src: /home/maja/.ssh/id_rsa.pub
+     dest: "{{ image_tmp_dir }}/authorized_keys"
+     remote_src: true
+```
+
+- Build the _Zuul VM qcow2 image_; changing the `image_output` variable to a suitable location.
+
+```
+$ ansible-playbook -vvv -c local -i localhost, -e qcow2_type=true -e image_output=/home/maja/softwarefactory.io/zuul -bK nodepool/virt_images/cloud-fedora-35.yaml
+```
+
+- Use the _Virtual Machine Manager_ to create a new VM:
+
+  - File -> New Virtual Machine
+  - Choose Import existing disk image
+  - Browse -> Browse Local to the `image_output` dir and select _zuul.qcow2_
+  - Type _Fedora XX_ as your operating system type
+  - Create the new VM with the other wizard default settings
+
+- ssh into the VM like in the example; once the VM is started its **IP** is _displayed above the login prompt_
+
+```
+$ ssh zuul-worker@192.168.122.253
+```
+
+- If you need to debug the hardly CI, as an example, copy the hardly project into the VM and enter the VM again:
+
+```
+$ scp -r /home/maja/PycharmProjects/hardly/ zuul-worker@192.168.122.253:/home/zuul-worker
+$ ssh zuul-worker@192.168.122.253
+```
+
+- Start the ansible playbook for the CI with something like the following
+
+```
+$ cd hardly
+$ ansible-playbook -vvv -c local -i localhost, -e '{"zuul": {"branch": "main", "project": {"src_dir": "/home/zuul-worker/hardly"}}}' files/zuul-tests.yaml
+```
