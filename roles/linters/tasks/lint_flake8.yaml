@@ -1,6 +1,6 @@
 ---
 - name: "Run flake8"
-  shell: find * -name "*.py" | xargs --no-run-if-empty flake8
+  ansible.builtin.shell: find * -name "*.py" | xargs --no-run-if-empty flake8
   register: _flake8
   ignore_errors: true
   changed_when: false
@@ -10,6 +10,6 @@
     chdir: "{{ zuul.project.src_dir }}"
 
 - name: Set linter failure to true
-  set_fact:
+  ansible.builtin.set_fact:
     linter_failure: true
   when: _flake8.rc
