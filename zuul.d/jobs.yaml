@@ -43,6 +43,12 @@
     run: playbooks/pre-commit.yaml
 
 - job:
+    name: hugo
+    description: Install and run hugo
+    parent: base
+    run: playbooks/hugo.yaml
+
+- job:
     name: oc-cluster-up
     parent: base
     attempts: 1

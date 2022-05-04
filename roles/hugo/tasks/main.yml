@@ -1,0 +1,13 @@
+---
+- name: Install hugo
+  dnf:
+    name:
+      - hugo
+  become: true
+
+- name: Build the website
+  command: hugo
+  args:
+    chdir: "{{ zuul.project.src_dir }}"
+  register: hugo_result
+  changed_when: "hugo_result.rc == 1"
