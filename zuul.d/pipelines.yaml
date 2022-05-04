@@ -28,14 +28,12 @@
       github.com:
         status: "success"
         status-url: "https://softwarefactory-project.io/zuul/t/packit-service/buildset/{buildset.uuid}"
-      sqlreporter:
       mqtt:
         topic: "zuul/{pipeline}/result/{project}/{branch}/{change}"
     failure:
       github.com:
         status: "failure"
         status-url: "https://softwarefactory-project.io/zuul/t/packit-service/buildset/{buildset.uuid}"
-      sqlreporter:
       mqtt:
         topic: "zuul/{pipeline}/result/{project}/{branch}/{change}"
 
@@ -100,7 +98,6 @@
         status-url: "https://softwarefactory-project.io/zuul/t/packit-service/buildset/{buildset.uuid}"
         merge: true
         comment: true
-      sqlreporter:
       mqtt:
         topic: "zuul/{pipeline}/result/{project}/{branch}/{change}"
     failure:
@@ -108,7 +105,6 @@
         status: "failure"
         status-url: "https://softwarefactory-project.io/zuul/t/packit-service/buildset/{buildset.uuid}"
         comment: true
-      sqlreporter:
       mqtt:
         topic: "zuul/{pipeline}/result/{project}/{branch}/{change}"
     window-floor: 20
@@ -128,7 +124,6 @@
       mqtt:
         topic: "zuul/{pipeline}/start/{project}/{branch}"
     success:
-      sqlreporter:
       mqtt:
         topic: "zuul/{pipeline}/result/{project}/{branch}/{change}"
     failure:
@@ -136,7 +131,6 @@
         from: "zuul@softwarefactory-project.io"
         to: "root@localhost"
         subject: "[Zuul] Job failed in post pipeline: {change.project}"
-      sqlreporter:
       mqtt:
         topic: "zuul/{pipeline}/result/{project}/{branch}/{change}"
 
@@ -150,14 +144,11 @@
       github.com:
         - event: push
           ref: ^refs/tags/.*$
-    success:
-      sqlreporter:
     failure:
       smtp:
         from: "zuul@fedora.softwarefactory-project.io"
         to: "root@localhost"
         subject: "[Zuul] Job failed in tag pipeline: {change.project}"
-      sqlreporter:
 
 - pipeline:
     name: promote
@@ -181,11 +172,9 @@
     success:
       github.com:
         status: success
-      sqlreporter:
     failure:
       github.com:
         status: failure
-      sqlreporter:
 
 - pipeline:
     name: periodic
@@ -200,7 +189,6 @@
       mqtt:
         topic: "zuul/{pipeline}/start/{project}/{branch}"
     success:
-      sqlreporter:
       mqtt:
         topic: "zuul/{pipeline}/result/{project}/{branch}/{change}"
     failure:
@@ -208,7 +196,6 @@
         from: "zuul@softwarefactory-project.io"
         to: "root@localhost"
         subject: "[Zuul] Job failed in periodic pipeline: {change.project}"
-      sqlreporter:
       mqtt:
         topic: "zuul/{pipeline}/result/{project}/{branch}/{change}"
 
@@ -231,11 +218,9 @@
         topic: "zuul/{pipeline}/start/{project}/{branch}"
     success:
       github.com: {}
-      sqlreporter:
       mqtt:
         topic: "zuul/{pipeline}/result/{project}/{branch}/{change}"
     failure:
       github.com: {}
-      sqlreporter:
       mqtt:
         topic: "zuul/{pipeline}/result/{project}/{branch}/{change}"
