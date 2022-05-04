@@ -1,6 +1,6 @@
 ---
 - name: Run doc8
-  ansible.builtin.shell: >
+  shell: >
     find * -name "*.rst" | xargs --no-run-if-empty doc8
   register: _doc8
   ignore_errors: true
@@ -11,6 +11,6 @@
     chdir: "{{ zuul.project.src_dir }}"
 
 - name: Set linter failure to true
-  ansible.builtin.set_fact:
+  set_fact:
     linter_failure: true
   when: _doc8.rc

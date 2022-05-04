@@ -1,6 +1,6 @@
 ---
 - name: Install packages
-  ansible.builtin.dnf:
+  dnf:
     name:
       - git-core
       - python36
@@ -10,7 +10,7 @@
   become: true
 
 - name: Run pre-commit
-  ansible.builtin.command: pre-commit run --all-files --hook-stage manual
+  command: pre-commit run --all-files --hook-stage manual
   args:
     chdir: "{{ zuul.project.src_dir }}"
   register: pc_result
