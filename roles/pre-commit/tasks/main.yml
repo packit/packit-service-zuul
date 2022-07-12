@@ -10,7 +10,7 @@
   become: true
 
 - name: Run pre-commit
-  ansible.builtin.command: pre-commit run --all-files --hook-stage manual
+  ansible.builtin.command: pre-commit run --all-files --hook-stage manual --verbose
   args:
     chdir: "{{ zuul.project.src_dir }}"
   register: pc_result
