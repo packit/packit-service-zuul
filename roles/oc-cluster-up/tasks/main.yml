@@ -38,7 +38,7 @@
 - name: Add OpenShift insecure registry into docker deamon config
   ansible.builtin.lineinfile:
     path: /etc/docker/daemon.json
-    search_string: insecure-registries
+    regexp: insecure-registries
     line: |
       {"insecure-registries" : [ "172.30.0.0/16" ]}
     create: true
