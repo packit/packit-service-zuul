@@ -4,13 +4,14 @@
     name:
       - epel-release
   become: true
-  when: ansible_distribution == 'CentOS'
+
 - name: Setup Docker CE repo
   ansible.builtin.get_url:
     url: https://download.docker.com/linux/centos/docker-ce.repo
     dest: /etc/yum.repos.d/docker-ce.repo
     mode: 0644
   become: true
+
 - name: Install Docker CE
   ansible.builtin.package:
     name:
@@ -20,41 +21,36 @@
       - centos-release-openshift-origin
     state: present
   become: true
+
 - name: Install Openshift Origin
   ansible.builtin.package:
     name:
       - origin
     state: present
   become: true
+
 - name: Put SELinux in permissive mode, logging actions that would be blocked.
   selinux:
     policy: targeted
     state: permissive
   become: true
+
+- name: Add OpenShift insecure registry into docker deamon config
+  ansible.builtin.lineinfile:
+    path: /etc/docker/daemon.json
+    search_string: insecure-registries
+    line: |
+      {"insecure-registries" : [ "172.30.0.0/16" ]}
+    create: true
+    mode: 0644
+  become: true
+
 - name: Make sure docker is running
   ansible.builtin.systemd:
     name: docker
     state: started
   become: true
-- name: Create docker deamon config
-  ansible.builtin.file:
-    path: /etc/docker/daemon.json
-    state: touch
-    mode: 0644
-  become: true
-- name: Add OpenShift insecure registry into docker deamon config
-  ansible.builtin.copy:
-    content: |
-      {"insecure-registries" : [ "172.30.0.0/16" ]}
-    dest: /etc/docker/daemon.json
-    mode: 0644
-  become: true
-- name: Restart docker because config has changed
-  ansible.builtin.systemd:
-    state: restarted
-    daemon_reload: true
-    name: docker
-  become: true
+
 - name: Start Openshift cluster
   ansible.builtin.command: oc cluster up --base-dir=/tmp --enable="-centos-imagestreams,-sample-templates,persistent-volumes,registry,router,-web-console"
   environment:
