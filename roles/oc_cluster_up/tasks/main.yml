@@ -9,7 +9,7 @@
   ansible.builtin.get_url:
     url: https://download.docker.com/linux/centos/docker-ce.repo
     dest: /etc/yum.repos.d/docker-ce.repo
-    mode: 0644
+    mode: "0644"
   become: true
 
 - name: Install Docker CE
@@ -42,7 +42,7 @@
     line: |
       {"insecure-registries" : [ "172.30.0.0/16" ]}
     create: true
-    mode: 0644
+    mode: "0644"
   become: true
 
 - name: Make sure docker is running

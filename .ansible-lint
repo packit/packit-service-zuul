@@ -2,11 +2,8 @@
 
 exclude_paths:
   - zuul.d/secret-sflogs.yaml
-
-skip_list:
-  - missing-import  # in playbooks/base/ we import roles not from this repo
-  - role-name  # we're not going to publish the roles
-  - unnamed-task  # pretty strict
+  # {pre|post}.yaml import roles not from this repo
+  - playbooks/base/
 
 mock_modules:
   # Silence for F35, move to ansible.posix.selinux since F36

@@ -1,4 +1,5 @@
 ---
-- hosts: all
+- name: Run pre_commit
+  hosts: all
   roles:
-    - pre-commit
+    - pre_commit
