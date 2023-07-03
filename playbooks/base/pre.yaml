@@ -16,7 +16,7 @@
       when: "ansible_connection != 'kubectl'"
     - block:
         - include_role: name=prepare-workspace-openshift
-        - include_role: name=remove-zuul-sshkey
+        - include_role: name=remove_zuul_sshkey
       run_once: true
       when: "ansible_connection == 'kubectl'"
     - import_role: name=ensure-output-dirs

@@ -1,4 +1,5 @@
 ---
-- hosts: all
+- name: Run oc_cluster_up
+  hosts: all
   roles:
-    - oc-cluster-up
+    - oc_cluster_up

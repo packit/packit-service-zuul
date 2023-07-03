@@ -3,7 +3,8 @@
   ansible.builtin.set_fact:
     linter_failure: false
 
-- include: "lint_{{ item }}.yaml"
+- name: Include linter tasks
+  ansible.builtin.include_tasks: "lint_{{ item }}.yaml"
   loop: "{{ linters }}"
 
 - name: Fail if one linter failed
