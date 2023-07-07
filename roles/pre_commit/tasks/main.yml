@@ -3,9 +3,6 @@
   ansible.builtin.dnf:
     name:
       - git-core
-      - python36
-      - python37
-      - python38
       - golang-bin
       - pre-commit
   become: true
