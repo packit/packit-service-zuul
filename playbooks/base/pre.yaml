@@ -28,3 +28,4 @@
           - epel-release
           - epel-next-release
         state: present
+      become: true
