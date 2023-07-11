@@ -1,10 +1,14 @@
 ---
-- name: Install packages
+- name: Install RPM packages
   ansible.builtin.dnf:
     name:
       - git-core
-      - pre-commit
   become: true
+
+- name: Install pre-commit
+  ansible.builtin.pip:
+    name:
+      - pre-commit # https://bugzilla.redhat.com/show_bug.cgi?id=2032554
 
 - name: Run pre-commit
   ansible.builtin.command: pre-commit run --all-files --hook-stage manual --verbose
