@@ -46,7 +46,7 @@ Your locally cloned repo is: `project_dir: "{{ ansible_user_dir }}/{{ zuul.proje
 - [OpenStack's repo](https://opendev.org/zuul/zuul-jobs/src/branch/master) with existing jobs, playbooks and roles and [repositories which use it](https://opendev.org/openstack).
 - [Available nodes](https://softwarefactory-project.io/cgit/config/tree/nodepool/diskimages/package.dhall).
 - Zuul/Gerrit questions & issues:
-  - Internal IRC channel #rhos-ops
+  - Slack channel #rhos-ops
   - softwarefactory-operations-team@redhat.com
 
 ## Debug locally in a Zuul VM
