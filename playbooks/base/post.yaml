@@ -25,6 +25,17 @@
       ara_report_run: false
       ara_report_type: database
       ara_report_path: ara-report
+  tasks:
+    - when: not zuul_success | bool
+      zuul_return:
+        data:
+          zuul:
+            artifacts:
+              - name: "LogJuicer Report"
+                url: "{{ logjuicer_web_url }}/report/new?target={{ zuul_web_url }}/build/{{ zuul.build }}"
+      vars:
+        logjuicer_web_url: https://softwarefactory-project.io/logjuicer
+        zuul_web_url: https://softwarefactory-project.io/zuul/t/{{ zuul.tenant }}
 
 - hosts: elk.softwarefactory-project.io
   gather_facts: false
