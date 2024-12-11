@@ -27,3 +27,4 @@
         name: epel-release
         state: present
       become: true
+      when: ansible_distribution != "Fedora"
