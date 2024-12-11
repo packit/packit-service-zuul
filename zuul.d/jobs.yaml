@@ -17,7 +17,7 @@
     nodeset:
       nodes:
         - name: container
-          label: cloud-centos-9-stream
+          label: cloud-fedora-41
 
 - job:
     name: linters
