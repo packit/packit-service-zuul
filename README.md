@@ -102,7 +102,6 @@ $ ansible-playbook -vvv -c local -i localhost, -e qcow2_type=true -e image_outpu
 ```
 
 - Use the _Virtual Machine Manager_ to create a new VM:
-
   - File -> New Virtual Machine
   - Choose Import existing disk image
   - Browse -> Browse Local to the `image_output` dir and select _zuul.qcow2_
