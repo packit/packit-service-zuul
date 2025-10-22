@@ -4,6 +4,7 @@
     name:
       - git-core
       - pre-commit
+      - libatomic # required by prettier check with Node.js >= 25.0.0
   become: true
 
 - name: Run pre-commit
